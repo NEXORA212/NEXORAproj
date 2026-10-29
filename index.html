@@ -1,0 +1,1577 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#050505">
+<meta name="description" content="NEXORA — умный поиск коммерческих помещений и совместной аренды для бизнеса.">
+<title>NEXORA — пространство для бизнеса</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --bg: #050505;
+    --panel: #0b0b0b;
+    --card: #101010;
+    --white: #f5f5f5;
+    --muted: #777;
+    --line: #242424;
+    --accent: #d8ff3e;
+    --ease: cubic-bezier(.22, 1, .36, 1);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    background: var(--bg);
+}
+
+body {
+    min-height: 100vh;
+    overflow-x: hidden;
+    background: var(--bg);
+    color: var(--white);
+    font-family: 'Manrope', sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+body.locked {
+    overflow: hidden;
+}
+
+button, input, select, textarea {
+    font: inherit;
+}
+
+button, a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+button {
+    color: inherit;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 4px;
+}
+
+::selection {
+    color: #050505;
+    background: var(--accent);
+}
+
+/* HEADER */
+
+.header {
+    position: fixed;
+    inset: 0 0 auto;
+    height: 88px;
+    padding: 0 5%;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    align-items: center;
+    z-index: 100;
+    background: linear-gradient(to bottom, rgba(5,5,5,.96), rgba(5,5,5,.65), transparent);
+}
+
+.logo-left,
+.user-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border: 1px solid var(--line);
+    background: rgba(255,255,255,.02);
+    cursor: pointer;
+    transition: .35s var(--ease);
+}
+
+.logo-left {
+    justify-self: start;
+    font-family: 'Syncopate', sans-serif;
+    font-size: 23px;
+    font-weight: 700;
+}
+
+.user-right {
+    justify-self: end;
+    border-radius: 50%;
+}
+
+.logo-left:hover,
+.user-right:hover {
+    border-color: #777;
+    background: #151515;
+    transform: scale(.95);
+}
+
+.brand {
+    justify-self: center;
+    font-family: 'Syncopate', sans-serif;
+    font-size: clamp(15px, 2vw, 21px);
+    font-weight: 700;
+    letter-spacing: .34em;
+    padding-left: .34em;
+    white-space: nowrap;
+}
+
+.brand span {
+    display: block;
+    margin-top: 5px;
+    text-align: center;
+    font-family: 'Manrope', sans-serif;
+    font-size: 8px;
+    font-weight: 500;
+    letter-spacing: .48em;
+    color: var(--muted);
+}
+
+/* ICONS */
+
+.icon {
+    width: 21px;
+    height: 21px;
+    display: block;
+}
+
+/* HERO */
+
+.hero {
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    padding: 120px 24px 80px;
+}
+
+.hero::before {
+    content: "N";
+    position: absolute;
+    left: 50%;
+    top: 48%;
+    transform: translate(-50%, -50%);
+    font-family: 'Syncopate', sans-serif;
+    font-size: min(78vw, 850px);
+    line-height: 1;
+    font-weight: 700;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(255,255,255,.045);
+    pointer-events: none;
+    animation: backgroundReveal 1.6s var(--ease) both;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 900px;
+    text-align: center;
+    animation: riseIn 1s var(--ease) both;
+}
+
+.eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 28px;
+    font-size: 10px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: #aaa;
+}
+
+.eyebrow::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 14px rgba(216,255,62,.45);
+}
+
+.hero h1 {
+    font-family: 'Syncopate', sans-serif;
+    font-size: clamp(36px, 7.4vw, 88px);
+    line-height: 1.13;
+    letter-spacing: -.055em;
+    font-weight: 700;
+}
+
+.hero h1 .outline {
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(255,255,255,.65);
+}
+
+.hero-description {
+    max-width: 490px;
+    margin: 25px auto 34px;
+    color: #999;
+    font-size: 14px;
+    line-height: 1.9;
+}
+
+.hero-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    min-height: 52px;
+    padding: 0 25px;
+    border: 1px solid var(--white);
+    background: var(--white);
+    color: #050505;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .06em;
+    cursor: pointer;
+    transition: background .3s, color .3s, border-color .3s, transform .3s var(--ease);
+}
+
+.btn:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+    transform: translateY(-3px);
+}
+
+.btn:active {
+    transform: scale(.98);
+}
+
+.btn-secondary {
+    color: var(--white);
+    background: transparent;
+    border-color: #3a3a3a;
+}
+
+.btn-secondary:hover {
+    color: #050505;
+    border-color: var(--accent);
+}
+
+.arrow {
+    font-size: 17px;
+    transition: transform .3s var(--ease);
+}
+
+.btn:hover .arrow {
+    transform: translateX(4px);
+}
+
+.hero-bottom {
+    position: absolute;
+    bottom: 30px;
+    left: 5%;
+    right: 5%;
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    color: #666;
+    font-size: 9px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+}
+
+/* MENU */
+
+.menu-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 150;
+    background: rgba(0,0,0,.72);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity .45s, visibility .45s;
+}
+
+.menu-overlay.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.side-menu {
+    position: fixed;
+    z-index: 200;
+    inset: 0 auto 0 0;
+    width: min(380px, 88vw);
+    padding: 110px 34px 35px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    background: #080808;
+    border-right: 1px solid var(--line);
+    transform: translateX(-102%);
+    visibility: hidden;
+    transition: transform .65s var(--ease), visibility .65s;
+}
+
+.side-menu.active {
+    transform: translateX(0);
+    visibility: visible;
+}
+
+.menu-label {
+    margin-bottom: 22px;
+    color: #666;
+    font-size: 9px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+}
+
+.menu-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 17px 0;
+    border-bottom: 1px solid var(--line);
+    color: #ccc;
+    font-size: 14px;
+    transition: color .3s, padding .3s var(--ease);
+}
+
+.menu-link span:last-child {
+    color: #555;
+    font-size: 18px;
+}
+
+.menu-link:hover {
+    padding-left: 8px;
+    color: var(--accent);
+}
+
+.menu-footer {
+    margin-top: auto;
+    padding-top: 35px;
+    color: #555;
+    font-size: 10px;
+    line-height: 1.9;
+}
+
+/* FULLSCREEN PANELS */
+
+.panel {
+    position: fixed;
+    inset: 0;
+    z-index: 300;
+    padding: 110px 5% 60px;
+    overflow-y: auto;
+    background: var(--bg);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(18px) scale(.99);
+    transition:
+        opacity .4s ease,
+        transform .6s var(--ease),
+        visibility .6s;
+}
+
+.panel.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0) scale(1);
+}
+
+.panel-top {
+    max-width: 1100px;
+    margin: 0 auto 38px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.panel-kicker {
+    margin-bottom: 12px;
+    color: var(--accent);
+    font-size: 10px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+}
+
+.panel h2 {
+    font-family: 'Syncopate', sans-serif;
+    font-size: clamp(25px, 4.6vw, 49px);
+    line-height: 1.25;
+    letter-spacing: -.04em;
+}
+
+.close-btn {
+    flex: 0 0 auto;
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--line);
+    background: transparent;
+    color: var(--white);
+    font-size: 23px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.close-btn:hover {
+    background: var(--white);
+    color: #050505;
+    transform: rotate(90deg);
+}
+
+.panel-content {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.muted {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+.section-title {
+    margin: 30px 0 18px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+}
+
+/* FORMS */
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.field.full {
+    grid-column: 1 / -1;
+}
+
+.field label {
+    color: #aaa;
+    font-size: 11px;
+}
+
+.field input,
+.field select,
+.field textarea {
+    width: 100%;
+    min-height: 52px;
+    padding: 14px 15px;
+    border: 1px solid #292929;
+    border-radius: 0;
+    outline: none;
+    background: #0c0c0c;
+    color: var(--white);
+    font-size: 13px;
+    transition: border-color .3s;
+}
+
+.field textarea {
+    min-height: 110px;
+    resize: vertical;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+    border-color: #888;
+}
+
+.field select option {
+    background: #0c0c0c;
+}
+
+.form-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 24px;
+}
+
+.notice {
+    margin-top: 20px;
+    color: #777;
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+.result-message {
+    display: none;
+    margin-top: 22px;
+    padding: 18px;
+    border: 1px solid #353535;
+    color: var(--white);
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+.result-message.visible {
+    display: block;
+    animation: riseIn .4s var(--ease) both;
+}
+
+/* RENT MODE */
+
+.mode-switch {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 25px;
+}
+
+.mode-btn {
+    padding: 12px 16px;
+    border: 1px solid var(--line);
+    background: transparent;
+    color: #aaa;
+    font-size: 11px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.mode-btn.active,
+.mode-btn:hover {
+    border-color: var(--white);
+    background: var(--white);
+    color: #050505;
+}
+
+.listing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 15px;
+    margin-top: 28px;
+}
+
+.listing-card {
+    padding: 23px;
+    border: 1px solid var(--line);
+    background: var(--card);
+    transition: transform .35s var(--ease), border-color .35s;
+}
+
+.listing-card:hover {
+    transform: translateY(-4px);
+    border-color: #555;
+}
+
+.listing-type {
+    color: var(--accent);
+    font-size: 9px;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+}
+
+.listing-card h3 {
+    margin: 16px 0 10px;
+    font-size: 17px;
+}
+
+.listing-card p {
+    margin-top: 8px;
+    color: #888;
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+.listing-price {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.listing-price small {
+    color: #777;
+    font-size: 10px;
+    font-weight: 400;
+}
+
+/* GENERIC CARDS */
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 15px;
+}
+
+.info-card {
+    padding: 25px;
+    border: 1px solid var(--line);
+    background: var(--card);
+}
+
+.info-number {
+    color: var(--accent);
+    font-family: 'Syncopate', sans-serif;
+    font-size: 20px;
+}
+
+.info-card h3 {
+    margin: 20px 0 12px;
+    font-size: 15px;
+}
+
+.info-card p {
+    color: #888;
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+.empty-state {
+    padding: 35px 25px;
+    border: 1px dashed #333;
+    color: #888;
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+/* FOOTER */
+
+.site-footer {
+    padding: 35px 5%;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    border-top: 1px solid #171717;
+    color: #555;
+    font-size: 10px;
+}
+
+/* ANIMATIONS */
+
+@keyframes riseIn {
+    from {
+        opacity: 0;
+        transform: translateY(22px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes backgroundReveal {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -46%) scale(.96);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+    }
+}
+
+/* MOBILE */
+
+@media (max-width: 760px) {
+    .header {
+        height: 72px;
+        padding: 0 20px;
+        grid-template-columns: 1fr 2fr 1fr;
+    }
+
+    .logo-left,
+    .user-right {
+        width: 42px;
+        height: 42px;
+    }
+
+    .logo-left {
+        font-size: 19px;
+    }
+
+    .brand {
+        font-size: 14px;
+        letter-spacing: .22em;
+        padding-left: .22em;
+    }
+
+    .brand span {
+        font-size: 7px;
+    }
+
+    .hero {
+        padding: 110px 20px 95px;
+    }
+
+    .hero h1 {
+        font-size: clamp(33px, 9vw, 60px);
+    }
+
+    .hero-description {
+        max-width: 360px;
+        font-size: 12px;
+    }
+
+    .hero-bottom {
+        bottom: 20px;
+        font-size: 8px;
+    }
+
+    .panel {
+        padding: 95px 20px 40px;
+    }
+
+    .panel-top {
+        align-items: flex-start;
+    }
+
+    .form-grid,
+    .listing-grid,
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .field.full {
+        grid-column: auto;
+    }
+
+    .panel h2 {
+        font-size: clamp(24px, 7vw, 36px);
+    }
+
+    .site-footer {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 380px) {
+    .brand {
+        font-size: 12px;
+    }
+
+    .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .hero-actions .btn {
+        width: 100%;
+    }
+
+    .hero-bottom span:last-child {
+        text-align: right;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<header class="header">
+    <button class="logo-left" id="menu-button"
+        aria-label="Открыть меню"
+        aria-expanded="false"
+        aria-controls="side-menu">N</button>
+
+    <a class="brand" href="#home" aria-label="NEXORA — главная">
+        NEXORA
+        <span>SPACE FOR BUSINESS</span>
+    </a>
+
+    <button class="user-right" aria-label="Профиль"
+        onclick="openPanel('account')">
+        <svg class="icon" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="1.5">
+            <circle cx="12" cy="8" r="4"/>
+            <path d="M4 21c0-4.2 3.6-7 8-7s8 2.8 8 7"/>
+        </svg>
+    </button>
+</header>
+
+<!-- MENU OVERLAY -->
+
+<div class="menu-overlay" id="menu-overlay"></div>
+
+<!-- SIDE MENU -->
+
+<nav class="side-menu" id="side-menu" aria-label="Главное меню">
+    <div class="menu-label">Навигация / 01—07</div>
+
+    <a class="menu-link" href="#find" data-panel="find">
+        <span>Найти помещение</span><span>↗</span>
+    </a>
+
+    <a class="menu-link" href="#groups" data-panel="groups">
+        <span>Совместная аренда</span><span>↗</span>
+    </a>
+
+    <a class="menu-link" href="#account" data-panel="account">
+        <span>Личный кабинет</span><span>↗</span>
+    </a>
+
+    <a class="menu-link" href="#my-premises" data-panel="premises">
+        <span>Сдать помещение</span><span>↗</span>
+    </a>
+
+    <a class="menu-link" href="#deals" data-panel="deals">
+        <span>Предложения</span><span>↗</span>
+    </a>
+
+    <a class="menu-link" href="#about" data-panel="about">
+        <span>О проекте</span><span>↗</span>
+    </a>
+
+    <a class="menu-link" href="#support" data-panel="support">
+        <span>Поддержка</span><span>↗</span>
+    </a>
+
+    <div class="menu-footer">
+        NEXORA © 2026<br>
+        Умнее ищем. Эффективнее арендуем.
+    </div>
+</nav>
+
+<!-- HOME -->
+
+<main id="home">
+    <section class="hero">
+        <div class="hero-content">
+            <div class="eyebrow">Новая логика коммерческой аренды</div>
+
+            <h1>
+                SPACE FOR<br>
+                <span class="outline">BUSINESS</span>
+            </h1>
+
+            <p class="hero-description">
+                Находи коммерческие помещения, объединяйся
+                с предпринимателями и ищи пространство,
+                которое подходит твоему бизнесу.
+            </p>
+
+            <div class="hero-actions">
+                <button class="btn" onclick="openPanel('find')">
+                    Найти помещение <span class="arrow">↗</span>
+                </button>
+
+                <button class="btn btn-secondary"
+                    onclick="openPanel('groups')">
+                    Совместная аренда
+                </button>
+            </div>
+        </div>
+
+        <div class="hero-bottom">
+            <span>Commercial real estate</span>
+            <span>Think beyond space ↗</span>
+        </div>
+    </section>
+</main>
+
+<!-- FIND PREMISES -->
+
+<section class="panel" id="panel-find" aria-hidden="true">
+    <div class="panel-top">
+        <div>
+            <div class="panel-kicker">01 / Поиск</div>
+            <h2>Найди своё<br>пространство.</h2>
+        </div>
+        <button class="close-btn" onclick="closeEverything()"
+            aria-label="Закрыть">×</button>
+    </div>
+
+    <div class="panel-content">
+        <p class="muted">
+            Расскажи, что нужно твоему бизнесу.
+            NEXORA поможет организовать поиск.
+        </p>
+
+        <div class="section-title">Формат аренды</div>
+
+        <div class="mode-switch">
+            <button class="mode-btn active" data-mode="individual">
+                Обычная аренда
+            </button>
+            <button class="mode-btn" data-mode="shared">
+                Совместная аренда
+            </button>
+        </div>
+
+        <form id="search-form">
+            <div class="form-grid">
+                <div class="field">
+                    <label for="space-type">Тип помещения</label>
+                    <select id="space-type" required>
+                        <option value="">Выбери тип</option>
+                        <option>Склад</option>
+                        <option>Коммерческое помещение</option>
+                        <option>Помещение под кафе</option>
+                        <option>Гараж</option>
+                        <option>Производственное помещение</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="city">Город или район</label>
+                    <input id="city" required
+                        placeholder="Например, Москва">
+                </div>
+
+                <div class="field">
+                    <label for="area">Необходимая площадь, м²</label>
+                    <input id="area" type="number" min="1" required
+                        placeholder="Например, 200">
+                </div>
+
+                <div class="field">
+                    <label for="budget">Бюджет в месяц, ₽</label>
+                    <input id="budget" type="number" min="0"
+                        placeholder="Например, 100000">
+                </div>
+
+                <div class="field full">
+                    <label for="requirements">Дополнительные требования</label>
+                    <textarea id="requirements"
+                        placeholder="Высота потолков, электричество, подъезд для грузовиков и другое"></textarea>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button class="btn" type="submit">
+                    Подобрать варианты <span class="arrow">↗</span>
+                </button>
+                <button class="btn btn-secondary" type="reset">
+                    Очистить
+                </button>
+            </div>
+        </form>
+
+        <div class="result-message" id="search-result" role="status"></div>
+
+        <p class="notice">
+            Демоверсия: форма пока не ищет реальные объявления
+            и не отправляет данные на сервер.
+        </p>
+    </div>
+</section>
+
+<!-- SHARED RENTAL / GROUPS -->
+
+<section class="panel" id="panel-groups" aria-hidden="true">
+    <div class="panel-top">
+        <div>
+            <div class="panel-kicker">02 / Совместная аренда</div>
+            <h2>Больше возможностей.<br>Меньше лишних затрат.</h2>
+        </div>
+        <button class="close-btn" onclick="closeEverything()"
+            aria-label="Закрыть">×</button>
+    </div>
+
+    <div class="panel-content">
+        <p class="muted">
+            Укажи свою потребность. Идея NEXORA — находить
+            предпринимателей со схожими запросами и помогать
+            им искать подходящие помещения вместе.
+        </p>
+
+        <div class="info-grid" style="margin-top:28px">
+            <article class="info-card">
+                <div class="info-number">01</div>
+                <h3>Оставь заявку</h3>
+                <p>Укажи площадь, город, тип помещения и бюджет.</p>
+            </article>
+
+            <article class="info-card">
+                <div class="info-number">02</div>
+                <h3>Найди партнёров</h3>
+                <p>В будущем система сможет сопоставлять похожие заявки.</p>
+            </article>
+
+            <article class="info-card">
+                <div class="info-number">03</div>
+                <h3>Ищи вместе</h3>
+                <p>Согласуйте требования и изучите подходящие варианты.</p>
+            </article>
+        </div>
+
+        <div class="section-title">Создать заявку</div>
+
+        <form id="group-form">
+            <div class="form-grid">
+                <div class="field">
+                    <label for="group-city">Город</label>
+                    <input id="group-city" required placeholder="Город">
+                </div>
+
+                <div class="field">
+                    <label for="group-type">Тип помещения</label>
+                    <select id="group-type" required>
+                        <option value="">Выбери тип</option>
+                        <option>Склад</option>
+                        <option>Коммерческое помещение</option>
+                        <option>Помещение под кафе</option>
+                        <option>Гараж</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="group-area">Твоя площадь, м²</label>
+                    <input id="group-area" type="number" min="1"
+                        required placeholder="Например, 150">
+                </div>
+
+                <div class="field">
+                    <label for="group-budget">Твой бюджет в месяц, ₽</label>
+                    <input id="group-budget" type="number" min="0"
+                        placeholder="Например, 40000">
+                </div>
+
+                <div class="field full">
+                    <label for="group-contact">Контакт для связи</label>
+                    <input id="group-contact" required
+                        placeholder="Telegram или электронная почта">
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button class="btn" type="submit">
+                    Подготовить заявку <span class="arrow">↗</span>
+                </button>
+            </div>
+        </form>
+
+        <div class="result-message" id="group-result" role="status"></div>
+
+        <p class="notice">
+            Сейчас заявка обрабатывается только в браузере.
+            Автоматическое объединение пользователей ещё не подключено.
+        </p>
+    </div>
+</section>
+
+<!-- ACCOUNT -->
+
+<section class="panel" id="panel-account" aria-hidden="true">
+    <div class="panel-top">
+        <div>
+            <div class="panel-kicker">03 / Аккаунт</div>
+            <h2>Твоё пространство.</h2>
+        </div>
+        <button class="close-btn" onclick="closeEverything()"
+            aria-label="Закрыть">×</button>
+    </div>
+
+    <div class="panel-content">
+        <p class="muted">
+            В будущем здесь будут твои заявки, группы,
+            избранные помещения и сообщения.
+        </p>
+
+        <div class="empty-state" style="margin-top:28px">
+            Личный кабинет пока находится в разработке.<br>
+            Регистрация и сохранение данных ещё не подключены.
+        </div>
+
+        <div class="form-actions">
+            <button class="btn" onclick="openPanel('find')">
+                Создать поиск <span class="arrow">↗</span>
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- LIST YOUR PREMISES -->
+
+<section class="panel" id="panel-premises" aria-hidden="true">
+    <div class="panel-top">
+        <div>
+            <div class="panel-kicker">04 / Владельцам</div>
+            <h2>Есть помещение?<br>Найди арендатора.</h2>
+        </div>
+        <button class="close-btn" onclick="closeEverything()"
+            aria-label="Закрыть">×</button>
+    </div>
+
+    <div class="panel-content">
+        <p class="muted">
+            Подготовь информацию о помещении, чтобы в будущем
+            разместить предложение на платформе.
+        </p>
+
+        <form id="premises-form" style="margin-top:28px">
+            <div class="form-grid">
+                <div class="field">
+                    <label for="owner-type">Тип помещения</label>
+                    <select id="owner-type" required>
+                        <option value="">Выбери тип</option>
+                        <option>Склад</option>
+                        <option>Коммерческое помещение</option>
+                        <option>Помещение под кафе</option>
+                        <option>Гараж</option>
+                        <option>Производственное помещение</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="owner-city">Город</label>
+                    <input id="owner-city" required placeholder="Город">
+                </div>
+
+                <div class="field">
+                    <label for="owner-area">Площадь, м²</label>
+                    <input id="owner-area" type="number" min="1"
+                        required placeholder="Площадь">
+                </div>
+
+                <div class="field">
+                    <label for="owner-price">Стоимость в месяц, ₽</label>
+                    <input id="owner-price" type="number" min="0"
+                        required placeholder="Цена">
+                </div>
+
+                <div class="field full">
+                    <label for="owner-contact">Контакт</label>
+                    <input id="owner-contact" required
+                        placeholder="Telegram или электронная почта">
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button class="btn" type="submit">
+                    Подготовить предложение <span class="arrow">↗</span>
+                </button>
+            </div>
+        </form>
+
+        <div class="result-message" id="premises-result" role="status"></div>
+    </div>
+</section>
+
+<!-- DEALS -->
+
+<section class="panel" id="panel-deals" aria-hidden="true">
+    <div class="panel-top">
+        <div>
+            <div class="panel-kicker">05 / Предложения</div>
+            <h2>Пространство<br>для новых сделок.</h2>
+        </div>
+        <button class="close-btn" onclick="closeEverything()"
+            aria-label="Закрыть">×</button>
+    </div>
+
+    <div class="panel-content">
+        <p class="muted">
+            Ниже представлены демонстрационные карточки.
+            Это не реальные объявления и не актуальные цены рынка.
+        </p>
+
+        <div class="listing-grid">
+            <article class="listing-card">
+                <div class="listing-type">Пример / 001</div>
+                <h3>Складское помещение</h3>
+                <p>Пример локации: Москва</p>
+                <p>Площадь: 500 м²</p>
+                <div class="listing-price">
+                    По запросу <small>/ месяц</small>
+                </div>
+            </article>
+
+            <article class="listing-card">
+                <div class="listing-type">Пример / 002</div>
+                <h3>Коммерческое помещение</h3>
+                <p>Пример локации: Санкт-Петербург</p>
+                <p>Площадь: 120 м²</p>
+                <div class="listing-price">
+                    По запросу <small>/ месяц</small>
+                </div>
+            </article>
+
+            <article class="listing-card">
+                <div class="listing-type">Пример / 003</div>
+                <h3>Помещение под бизнес</h3>
+                <p>Пример локации: Казань</p>
+                <p>Площадь: 80 м²</p>
+                <div class="listing-price">
+                    По запросу <small>/ месяц</small>
+                </div>
+            </article>
+        </div>
+
+        <div class="form-actions">
+            <button class="btn" onclick="openPanel('find')">
+                Найти своё помещение <span class="arrow">↗</span>
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- ABOUT -->
+
+<section class="panel" id="panel-about" aria-hidden="true">
+    <div class="panel-top">
+        <div>
+            <div class="panel-kicker">06 / О проекте</div>
+            <h2>Мы меняем<br>подход к аренде.</h2>
+        </div>
+        <button class="close-btn" onclick="closeEverything()"
+            aria-label="Закрыть">×</button>
+    </div>
+
+    <div class="panel-content">
+        <p class="muted" style="max-width:720px">
+            NEXORA — концепция платформы для предпринимателей,
+            которым нужно коммерческое пространство. Наша идея —
+            упростить поиск, сопоставлять потребности бизнеса
+            и помогать находить возможности для совместной аренды.
+        </p>
+
+        <div class="info-grid" style="margin-top:30px">
+            <article class="info-card">
+                <div class="info-number">01</div>
+                <h3>Поиск</h3>
+                <p>Собирать потребности бизнеса в одном месте.</p>
+            </article>
+
+            <article class="info-card">
+                <div class="info-number">02</div>
+                <h3>Совпадения</h3>
+                <p>Находить похожие запросы и подходящие варианты.</p>
+            </article>
+
+            <article class="info-card">
+                <div class="info-number">03</div>
+                <h3>Автоматизация</h3>
+                <p>Постепенно внедрять ИИ для поиска и обработки заявок.</p>
+            </article>
+        </div>
+    </div>
+</section>
+
+<!-- SUPPORT -->
+
+<section class="panel" id="panel-support" aria-hidden="true">
+    <div class="panel-top">
+        <div>
+            <div class="panel-kicker">07 / Поддержка</div>
+            <h2>Есть вопросы?</h2>
+        </div>
+        <button class="close-btn" onclick="closeEverything()"
+            aria-label="Закрыть">×</button>
+    </div>
+
+    <div class="panel-content">
+        <p class="muted">
+            Напиши, что ты хотел бы узнать или предложить.
+        </p>
+
+        <form id="support-form" style="margin-top:28px">
+            <div class="form-grid">
+                <div class="field">
+                    <label for="support-name">Имя</label>
+                    <input id="support-name" required placeholder="Твоё имя">
+                </div>
+
+                <div class="field">
+                    <label for="support-contact">Контакт</label>
+                    <input id="support-contact" required
+                        placeholder="Telegram или электронная почта">
+                </div>
+
+                <div class="field full">
+                    <label for="support-message">Сообщение</label>
+                    <textarea id="support-message" required
+                        placeholder="Опиши свой вопрос"></textarea>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button class="btn" type="submit">
+                    Подготовить сообщение <span class="arrow">↗</span>
+                </button>
+            </div>
+        </form>
+
+        <div class="result-message" id="support-result" role="status"></div>
+
+        <p class="notice">
+            Форма пока не отправляет сообщения владельцу сайта.
+        </p>
+    </div>
+</section>
+
+<footer class="site-footer">
+    <span>NEXORA © 2026</span>
+    <span>SPACE FOR BUSINESS</span>
+</footer>
+
+<script>
+(() => {
+    const menu = document.getElementById('side-menu');
+    const menuButton = document.getElementById('menu-button');
+    const overlay = document.getElementById('menu-overlay');
+    const panels = document.querySelectorAll('.panel');
+    const body = document.body;
+
+    let currentMode = 'individual';
+
+    function updateScrollLock() {
+        const menuOpen = menu.classList.contains('active');
+        const panelOpen = [...panels].some(
+            panel => panel.classList.contains('active')
+        );
+
+        body.classList.toggle('locked', menuOpen || panelOpen);
+    }
+
+    function toggleMenu() {
+        const opening = !menu.classList.contains('active');
+
+        panels.forEach(panel => {
+            panel.classList.remove('active');
+            panel.setAttribute('aria-hidden', 'true');
+        });
+
+        menu.classList.toggle('active', opening);
+        overlay.classList.toggle('active', opening);
+        menuButton.setAttribute('aria-expanded', String(opening));
+        menuButton.setAttribute(
+            'aria-label',
+            opening ? 'Закрыть меню' : 'Открыть меню'
+        );
+
+        updateScrollLock();
+    }
+
+    window.openPanel = function(name) {
+        menu.classList.remove('active');
+        overlay.classList.remove('active');
+        menuButton.setAttribute('aria-expanded', 'false');
+        menuButton.setAttribute('aria-label', 'Открыть меню');
+
+        panels.forEach(panel => {
+            panel.classList.remove('active');
+            panel.setAttribute('aria-hidden', 'true');
+        });
+
+        const target = document.getElementById('panel-' + name);
+
+        if (!target) {
+            updateScrollLock();
+            return;
+        }
+
+        target.classList.add('active');
+        target.setAttribute('aria-hidden', 'false');
+        updateScrollLock();
+
+        const heading = target.querySelector('h2');
+        if (heading) {
+            heading.setAttribute('tabindex', '-1');
+            heading.focus({ preventScroll: true });
+        }
+    };
+
+    window.closeEverything = function() {
+        menu.classList.remove('active');
+        overlay.classList.remove('active');
+        menuButton.setAttribute('aria-expanded', 'false');
+        menuButton.setAttribute('aria-label', 'Открыть меню');
+
+        panels.forEach(panel => {
+            panel.classList.remove('active');
+            panel.setAttribute('aria-hidden', 'true');
+        });
+
+        updateScrollLock();
+    };
+
+    menuButton.addEventListener('click', toggleMenu);
+    overlay.addEventListener('click', toggleMenu);
+
+    document.querySelectorAll('[data-panel]').forEach(link => {
+        link.addEventListener('click', event => {
+            event.preventDefault();
+            openPanel(link.dataset.panel);
+        });
+    });
+
+    document.addEventListener('keydown', event => {
+        if (event.key === 'Escape') {
+            closeEverything();
+        }
+    });
+
+    // Переключение формата аренды
+    document.querySelectorAll('[data-mode]').forEach(button => {
+        button.addEventListener('click', () => {
+            document.querySelectorAll('[data-mode]').forEach(item => {
+                item.classList.toggle('active', item === button);
+            });
+
+            currentMode = button.dataset.mode;
+        });
+    });
+
+    // Форма поиска
+    document.getElementById('search-form').addEventListener('submit', event => {
+        event.preventDefault();
+
+        const type = document.getElementById('space-type').value;
+        const city = document.getElementById('city').value.trim();
+        const area = Number(document.getElementById('area').value);
+        const budget = document.getElementById('budget').value;
+        const requirements = document.getElementById('requirements').value.trim();
+
+        const result = document.getElementById('search-result');
+        result.replaceChildren();
+
+        const heading = document.createElement('strong');
+        heading.textContent = 'Заявка подготовлена';
+
+        const details = document.createElement('p');
+        details.style.marginTop = '10px';
+        details.textContent =
+            `Тип: ${type}. Город: ${city}. Площадь: ${area} м². ` +
+            `Формат: ${currentMode === 'shared' ? 'совместная аренда' : 'обычная аренда'}.`;
+
+        const extra = document.createElement('p');
+        extra.style.marginTop = '8px';
+        extra.textContent =
+            `Бюджет: ${budget ? Number(budget).toLocaleString('ru-RU') + ' ₽/мес.' : 'не указан'}. ` +
+            `Дополнительные требования: ${requirements || 'не указаны'}.`;
+
+        const note = document.createElement('p');
+        note.style.marginTop = '8px';
+        note.style.color = '#999';
+        note.textContent =
+            'Это демонстрация. Реальные объявления и ИИ-поиск пока не подключены.';
+
+        result.append(heading, details, extra, note);
+        result.classList.add('visible');
+        result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+
+    // Общая функция для демонстрационных форм
+    function setupDemoForm(formId, resultId, title, getSummary) {
+        const form = document.getElementById(formId);
+        const result = document.getElementById(resultId);
+
+        form.addEventListener('submit', event => {
+            event.preventDefault();
+            result.replaceChildren();
+
+            const heading = document.createElement('strong');
+            heading.textContent = title;
+
+            const text = document.createElement('p');
+            text.style.marginTop = '10px';
+            text.textContent = getSummary();
+
+            const note = document.createElement('p');
+            note.style.marginTop = '8px';
+            note.style.color = '#999';
+            note.textContent =
+                'Данные пока не отправлены на сервер и не сохранены.';
+
+            result.append(heading, text, note);
+            result.classList.add('visible');
+            result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        });
+
+        form.addEventListener('reset', () => {
+            result.classList.remove('visible');
+            result.replaceChildren();
+        });
+    }
+
+    setupDemoForm(
+        'group-form',
+        'group-result',
+        'Заявка на совместную аренду подготовлена',
+        () => {
+            const city = document.getElementById('group-city').value.trim();
+            const type = document.getElementById('group-type').value;
+            const area = document.getElementById('group-area').value;
+            const contact = document.getElementById('group-contact').value.trim();
+
+            return `Город: ${city}. Тип: ${type}. Твоя площадь: ${area} м². Контакт: ${contact}.`;
+        }
+    );
+
+    setupDemoForm(
+        'premises-form',
+        'premises-result',
+        'Предложение подготовлено',
+        () => {
+            const type = document.getElementById('owner-type').value;
+            const city = document.getElementById('owner-city').value.trim();
+            const area = document.getElementById('owner-area').value;
+            const price = document.getElementById('owner-price').value;
+            const contact = document.getElementById('owner-contact').value.trim();
+
+            return `${type}, ${city}, ${area} м², ${Number(price).toLocaleString('ru-RU')} ₽/мес. Контакт: ${contact}.`;
+        }
+    );
+
+    setupDemoForm(
+        'support-form',
+        'support-result',
+        'Сообщение подготовлено',
+        () => {
+            const name = document.getElementById('support-name').value.trim();
+            const contact = document.getElementById('support-contact').value.trim();
+            const message = document.getElementById('support-message').value.trim();
+
+            return `От: ${name}. Контакт: ${contact}. Сообщение: ${message}`;
+        }
+    );
+})();
+</script>
+
+</body>
+</html>
